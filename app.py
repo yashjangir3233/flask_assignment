@@ -1,5 +1,4 @@
 from flask import Flask, request, jsonify
-import awsgi
 import requests
 
 app = Flask(__name__)
@@ -92,10 +91,8 @@ def search_comments():
         return jsonify({"error": str(e)}), 500
     
 
-def lambda_handler(event,context):
-    return awsgi.response(app, event, context, base64_content_types={"image/png"})
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host = "0.0.0.0",port=5000)
 
 
